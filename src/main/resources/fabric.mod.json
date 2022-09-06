@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "wedontneedstone",
+  "version": "${version}",
+  "name": "We DON'T Need Stone",
+  "description": "Prevent stones fill your backpack.",
+  "authors": [
+    "moying"
+  ],
+  "contact": {
+    "repo": "https://github.com/Moying-moe/WeDontNeedStone"
+  },
+  "license": "MIT",
+  "icon": "assets/wedontneedstone/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "top.moyingmoe.wedontneedstone.client.WedontneedstoneClient"
+    ],
+    "main": [
+      "top.moyingmoe.wedontneedstone.Wedontneedstone"
+    ]
+  },
+  "mixins": [
+    "wedontneedstone.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
