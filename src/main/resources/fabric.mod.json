@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "idontneedstone",
   "version": "${version}",
-  "name": "We DON'T Need Stone",
-  "description": "Prevent stones fill your backpack.",
+  "name": "I DON'T Need Stone",
+  "description": "Prevent stones fill your Inventory.",
   "authors": [
     "moying"
   ],
