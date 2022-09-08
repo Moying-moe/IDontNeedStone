@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "wedontneedstone",
+  "id": "idontneedstone",
   "version": "${version}",
   "name": "We DON'T Need Stone",
   "description": "Prevent stones fill your backpack.",
@@ -8,21 +8,22 @@
     "moying"
   ],
   "contact": {
-    "repo": "https://github.com/Moying-moe/WeDontNeedStone"
+    "repo": "https://github.com/Moying-moe/IDontNeedStone"
   },
   "license": "MIT",
-  "icon": "assets/wedontneedstone/icon.png",
+  "icon": "assets/idontneedstone/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "top.moyingmoe.wedontneedstone.client.WedontneedstoneClient"
+      "top.moyingmoe.idontneedstone.client.IDontNeedStoneClient"
     ],
     "main": [
-      "top.moyingmoe.wedontneedstone.Wedontneedstone"
-    ]
+      "top.moyingmoe.idontneedstone.IDontNeedStone"
+    ],
+    "modmenu": [ "top.moyingmoe.idontneedstone.modmenu.ModMenuApiEntry" ]
   },
   "mixins": [
-    "wedontneedstone.mixins.json"
+    "idontneedstone.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.9",
