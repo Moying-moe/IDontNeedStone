@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import top.moyingmoe.idontneedstone.api.event.ItemEntityPickupCallback;
-import top.moyingmoe.idontneedstone.config.Config;
+import top.moyingmoe.idontneedstone.config.ServerConfig;
 import top.moyingmoe.idontneedstone.config.ServerConfigCache;
 import top.moyingmoe.idontneedstone.handler.FabricItemPickupHandler;
 
@@ -35,7 +35,7 @@ public class IDontNeedStone implements ModInitializer {
         // 注册接收事件 接收来自客户端的config同步请求
         ServerPlayNetworking.registerGlobalReceiver(IDontNeedStone.CONFIG_SYNC_PACKET_ID, (server, player, handler, buf, responseSender) -> {
             String jsonString = buf.readString();
-            Config config = Config.fromJsonString(jsonString);
+            ServerConfig config = ServerConfig.fromJsonString(jsonString);
             ServerConfigCache.updatePlayerConfig(player.getUuid(), config);
         });
     }

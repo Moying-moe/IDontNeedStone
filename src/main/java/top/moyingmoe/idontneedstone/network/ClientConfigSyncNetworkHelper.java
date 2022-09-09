@@ -24,7 +24,7 @@ public class ClientConfigSyncNetworkHelper {
      */
     public static void sendConfigToServer(Config config) {
         PacketByteBuf configBuf = PacketByteBufs.create();
-        configBuf.writeString(config.toJsonString());
+        configBuf.writeString(config.toServerConfig().toJsonString());
         ClientPlayNetworking.send(IDontNeedStone.CONFIG_SYNC_PACKET_ID, configBuf);
     }
 }

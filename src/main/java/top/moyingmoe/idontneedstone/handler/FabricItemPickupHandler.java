@@ -16,8 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.stat.Stats;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.moyingmoe.idontneedstone.IDontNeedStone;
-import top.moyingmoe.idontneedstone.config.Config;
+import top.moyingmoe.idontneedstone.config.ServerConfig;
 import top.moyingmoe.idontneedstone.config.ServerConfigCache;
 
 import java.util.Objects;
@@ -39,9 +38,8 @@ public class FabricItemPickupHandler {
         // 只有玩家可以拾取的时候才会检测
         if (!itemEntity.cannotPickup() && (itemEntity.getOwner() == null || itemEntity.getOwner().equals(player.getUuid()))) {
             // 尝试从configCache里获取玩家的config 如果为null的话 说明该玩家没有在本地安装此mod 那么就直接结束事件
-            Config config = ServerConfigCache.getPlayerConfig(player.getUuid());
+            ServerConfig config = ServerConfigCache.getPlayerConfig(player.getUuid());
             if (Objects.isNull(config)) {
-                IDontNeedStone.LOGGER.warn("no config found");
                 return;
             }
 
@@ -67,7 +65,7 @@ public class FabricItemPickupHandler {
                     // 这里不取消原版逻辑的执行也是可以的 因为原版后续的逻辑会检查pickup delay
                     // 而我们已经将它设置为一个非0的值了 那么物品必定不会被拾取
                     // 这样做的好处是不容易和其他会注入此函数的mod起冲突
-//                    callback.cancel();
+                    callback.cancel();
                 } else if (config.getIsAutoDrop()) {
                     // 如果物品不在黑名单中 且玩家开启了自动丢弃功能
                     PlayerInventory inventory = player.getInventory();

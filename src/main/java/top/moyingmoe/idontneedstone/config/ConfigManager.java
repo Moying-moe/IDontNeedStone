@@ -83,7 +83,7 @@ public class ConfigManager {
         }
         prepareConfigFile();
 
-        String jsonString = config.toJsonString();
+        String jsonString = IDontNeedStone.GSON.toJson(config);
 
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(jsonString);

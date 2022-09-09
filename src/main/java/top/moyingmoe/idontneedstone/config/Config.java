@@ -8,10 +8,6 @@
 package top.moyingmoe.idontneedstone.config;
 
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import top.moyingmoe.idontneedstone.IDontNeedStone;
 import top.moyingmoe.idontneedstone.hotkey.HotkeyManager;
 
 import java.util.*;
@@ -51,35 +47,30 @@ public class Config {
     private int autoDropKeepItemStacks = Default.autoDropKeepItemStacks;    // 自动丢弃最低保留数量
     private List<String> blacklist = Default.blacklist; // 过滤名单
 
-    private final transient Set<Item> blacklistItem = new HashSet<>();      // 代码中使用的列表
-
 
     public Config() {
         initial();
     }
 
     /**
-     * @return 对象的json字符串
+     * 创建Config对应的server版本，剔除了在server端不存在的类
+     * @return Config对应的ServerConfig
      */
-    public String toJsonString() {
-        return IDontNeedStone.GSON.toJson(this);
-    }
-
-    /**
-     * 从字符串创建对象
-     * @param jsonString json字符串
-     * @return 创建的新对象
-     */
-    public static Config fromJsonString(String jsonString) {
-        return IDontNeedStone.GSON.fromJson(jsonString, Config.class);
+    public ServerConfig toServerConfig() {
+        ServerConfig config = new ServerConfig();
+        config.setIsFilterOn(isFilterOn);
+        config.setIsFilterDisappeared(isFilterDisappeared);
+        config.setDisappearedTicks(disappearedTicks);
+        config.setIsAutoDrop(autoDrop);
+        config.setAutoDropKeepItemStacks(autoDropKeepItemStacks);
+        config.setBlacklist(blacklist);
+        return config;
     }
 
     /**
      * 初始化对象
      */
     public void initial() {
-        setBlacklistItem();
-
         filterHotkey = InputUtil.Type.KEYSYM.createFromCode(filterHotkeyCode);
     }
 
@@ -105,30 +96,6 @@ public class Config {
 
     public void setBlacklist(List<String> blacklist) {
         this.blacklist = blacklist;
-        setBlacklistItem();
-    }
-
-    public Set<Item> getBlacklistItem() {
-        return blacklistItem;
-    }
-
-    private void setBlacklistItem() {
-        Set<String> blacklistSet = new HashSet<>(blacklist);
-        blacklistItem.clear();
-
-        for (String itemName :
-                blacklistSet) {
-            try {
-                String[] temp = itemName.split(":");
-                String namespace = temp[0];
-                String path = temp[1];
-                Optional<Item> newItem = Registry.ITEM.getOrEmpty(new Identifier(namespace, path));
-                assert newItem.isPresent();
-                blacklistItem.add(newItem.get());
-            } catch (Throwable e) {
-                IDontNeedStone.LOGGER.warn("无法查找到的物品:" + itemName);
-            }
-        }
     }
 
     public InputUtil.Key getFilterHotkey() {

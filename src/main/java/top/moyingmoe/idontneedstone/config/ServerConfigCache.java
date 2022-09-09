@@ -17,7 +17,7 @@ import java.util.UUID;
  * 服务器端缓存用户Config的类
  */
 public class ServerConfigCache {
-    private static final Map<UUID, Config> CONFIG_CACHE = new HashMap<>();
+    private static final Map<UUID, ServerConfig> CONFIG_CACHE = new HashMap<>();
 
     /**
      * <p>缓存并更新玩家设置</p>
@@ -26,7 +26,7 @@ public class ServerConfigCache {
      * @param uuid 玩家uuid
      * @param config 玩家设置
      */
-    public static void updatePlayerConfig(UUID uuid, Config config) {
+    public static void updatePlayerConfig(UUID uuid, ServerConfig config) {
         CONFIG_CACHE.put(uuid, config);
     }
 
@@ -37,7 +37,7 @@ public class ServerConfigCache {
      * @return 玩家设置
      */
     @Nullable
-    public static Config getPlayerConfig(UUID uuid) {
+    public static ServerConfig getPlayerConfig(UUID uuid) {
         return CONFIG_CACHE.get(uuid);
     }
 }
