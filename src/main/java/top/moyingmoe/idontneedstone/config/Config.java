@@ -30,7 +30,17 @@ public class Config {
         public static final int disappearedTicks = 200;
         public static final boolean autoDrop = false;
         public static final int autoDropKeepItemStacks = 2;
-        public static final ArrayList<String> blacklist = new ArrayList<>(Arrays.asList("minecraft:cobbled_deepslate,minecraft:cobblestone".split(",")));
+        public static final ArrayList<String> blacklist = new ArrayList<>(Arrays.asList(
+                "minecraft:cobbled_deepslate",
+                "minecraft:cobblestone",
+                "minecraft:oak_sapling",
+                "minecraft:spruce_sapling",
+                "minecraft:birch_sapling",
+                "minecraft:jungle_sapling",
+                "minecraft:acacia_sapling",
+                "minecraft:dark_oak_sapling",
+                "minecraft:rotten_flesh"
+        ));
     }
     private boolean isFilterOn = Default.isFilterOn;         // 是否开启过滤
     private transient InputUtil.Key filterHotkey = Default.filterHotkey;  // 切换开启过滤的快捷键
