@@ -1,4 +1,4 @@
-# IDontNeedStone
+# I DON'T Need Stone
 
 A fabric mod for minecraft 1.19.2
 
