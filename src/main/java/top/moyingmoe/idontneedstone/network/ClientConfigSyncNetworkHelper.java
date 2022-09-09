@@ -18,6 +18,10 @@ import top.moyingmoe.idontneedstone.config.Config;
  * 服务器接受到后 将其缓存在ServerConfigCache类中
  */
 public class ClientConfigSyncNetworkHelper {
+    /**
+     * 向服务器发送config数据，使服务器缓存并更新玩家的设置
+     * @param config 向服务器发送的config数据对象
+     */
     public static void sendConfigToServer(Config config) {
         PacketByteBuf configBuf = PacketByteBufs.create();
         configBuf.writeString(config.toJsonString());

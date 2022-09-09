@@ -14,10 +14,17 @@ import top.moyingmoe.idontneedstone.network.ClientConfigSyncNetworkHelper;
 
 import java.io.*;
 
+/**
+ * <p>在Client端管理和储存用户Config</p>
+ * <p><b>这个类不能在Server环境中被调用!</b></p>
+ */
 public class ConfigManager {
     private static File file;
     private static Config config;
 
+    /**
+     * 准备config文件。如果不存在，则创建一个新的
+     */
     private static void prepareConfigFile() {
         if (file != null) {
             return;
@@ -25,6 +32,10 @@ public class ConfigManager {
         file = FabricLoader.getInstance().getConfigDir().resolve(IDontNeedStone.MOD_ID+".json").toFile();
     }
 
+    /**
+     * 初始化并读取配置文件中的config数据（如果有）
+     * @return 读取到的config对象
+     */
     public static Config initializeConfig() {
         if (config != null) {
             return config;
@@ -36,6 +47,9 @@ public class ConfigManager {
         return config;
     }
 
+    /**
+     * 从本地配置文件中读取config的数据
+     */
     private static void load() {
         prepareConfigFile();
 
@@ -58,6 +72,10 @@ public class ConfigManager {
         }
     }
 
+    /**
+     * <p>将config保存至本地配置文件中</p>
+     * <p>如果玩家已经登入了服务器，那么还会向服务器发起一次config同步请求</p>
+     */
     public static void save() {
         // 如果玩家正在服务器中游玩 通过modmenu修改设置 那么就还要向服务器发送同步请求
         if (IDontNeedStoneClient.inServer) {
@@ -65,7 +83,7 @@ public class ConfigManager {
         }
         prepareConfigFile();
 
-        String jsonString = IDontNeedStone.GSON.toJson(config);
+        String jsonString = config.toJsonString();
 
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(jsonString);
@@ -75,6 +93,10 @@ public class ConfigManager {
         }
     }
 
+    /**
+     * 获取当前的config
+     * @return config
+     */
     public static Config getConfig() {
         if (config == null) {
             config = new Config();

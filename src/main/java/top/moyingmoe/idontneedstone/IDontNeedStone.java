@@ -28,8 +28,7 @@ public class IDontNeedStone implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // 这段逻辑在逻辑client和逻辑server都会执行。
-        // 不过 因为拾取判定仅在server执行 因此 这段代码相当于仅在server执行
+        // 注册拾取事件
         final FabricItemPickupHandler itemPickupHandler = new FabricItemPickupHandler();
         ItemEntityPickupCallback.EVENT.register(itemPickupHandler::onEntityItemPickup);
 

@@ -16,7 +16,13 @@ import top.moyingmoe.idontneedstone.hotkey.HotkeyManager;
 
 import java.util.*;
 
+/**
+ * 玩家的设置类
+ */
 public class Config {
+    /**
+     * 所有配置选项的默认值
+     */
     public static class Default {
         public static final boolean isFilterOn = true;
         public static final InputUtil.Key filterHotkey = InputUtil.Type.KEYSYM.createFromCode(InputUtil.GLFW_KEY_U);
@@ -42,14 +48,25 @@ public class Config {
         initial();
     }
 
+    /**
+     * @return 对象的json字符串
+     */
     public String toJsonString() {
         return IDontNeedStone.GSON.toJson(this);
     }
 
+    /**
+     * 从字符串创建对象
+     * @param jsonString json字符串
+     * @return 创建的新对象
+     */
     public static Config fromJsonString(String jsonString) {
         return IDontNeedStone.GSON.fromJson(jsonString, Config.class);
     }
 
+    /**
+     * 初始化对象
+     */
     public void initial() {
         setBlacklistItem();
 

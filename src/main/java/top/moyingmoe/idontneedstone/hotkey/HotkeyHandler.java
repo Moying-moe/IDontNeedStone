@@ -10,13 +10,30 @@ package top.moyingmoe.idontneedstone.hotkey;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 
+/**
+ * 快捷键响应
+ */
 public abstract class HotkeyHandler {
     private InputUtil.Key hotkey;
     private boolean isOn = false;
 
-    protected abstract void onPress(MinecraftClient client);      // 按下时触发一次
-    protected abstract void onHold(MinecraftClient client);       // 按下时持续触发
-    protected abstract void onRelease(MinecraftClient client);    // 松开时触发一次
+    /**
+     * 当玩家按下按键时触发一次（即上沿触发）
+     * @param client client
+     */
+    protected abstract void onPress(MinecraftClient client);
+
+    /**
+     * 当玩家按住按键时持续触发
+     * @param client client
+     */
+    protected abstract void onHold(MinecraftClient client);
+
+    /**
+     * 当玩家松开按键时触发一次（即下沿触发
+     * @param client client
+     */
+    protected abstract void onRelease(MinecraftClient client);
 
     public HotkeyHandler(InputUtil.Key hotkey) {
         this.hotkey = hotkey;

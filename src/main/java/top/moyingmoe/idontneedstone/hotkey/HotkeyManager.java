@@ -14,6 +14,9 @@ import net.minecraft.client.util.InputUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 管理所有的绑定快捷键事件
+ */
 public class HotkeyManager {
     private static final Map<String,HotkeyHandler> hotkey = new HashMap<>();
 
