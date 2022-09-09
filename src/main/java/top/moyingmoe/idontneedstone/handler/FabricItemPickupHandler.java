@@ -16,9 +16,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.stat.Stats;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.moyingmoe.idontneedstone.IDontNeedStone;
 import top.moyingmoe.idontneedstone.config.Config;
-import top.moyingmoe.idontneedstone.config.ConfigManager;
+import top.moyingmoe.idontneedstone.config.ServerConfigCache;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class FabricItemPickupHandler {
@@ -28,9 +30,14 @@ public class FabricItemPickupHandler {
             return;
         }
 
+        // 只有玩家可以拾取的时候才会检测
         if (!itemEntity.cannotPickup() && (itemEntity.getOwner() == null || itemEntity.getOwner().equals(player.getUuid()))) {
-            // 只有玩家可以拾取的时候才会检测
-            Config config = ConfigManager.getConfig();
+            // 尝试从configCache里获取玩家的config 如果为null的话 说明该玩家没有在本地安装此mod 那么就直接结束事件
+            Config config = ServerConfigCache.getPlayerConfig(player.getUuid());
+            if (Objects.isNull(config)) {
+                IDontNeedStone.LOGGER.warn("no config found");
+                return;
+            }
 
             // 玩家是否开启过滤 如果没开启 那么所有功能都不会生效
             if (config.getIsFilterOn()) {

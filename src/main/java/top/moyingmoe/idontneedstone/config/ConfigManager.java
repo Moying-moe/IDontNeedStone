@@ -9,6 +9,8 @@ package top.moyingmoe.idontneedstone.config;
 
 import net.fabricmc.loader.api.FabricLoader;
 import top.moyingmoe.idontneedstone.IDontNeedStone;
+import top.moyingmoe.idontneedstone.client.IDontNeedStoneClient;
+import top.moyingmoe.idontneedstone.network.ClientConfigSyncNetworkHelper;
 
 import java.io.*;
 
@@ -57,6 +59,10 @@ public class ConfigManager {
     }
 
     public static void save() {
+        // 如果玩家正在服务器中游玩 通过modmenu修改设置 那么就还要向服务器发送同步请求
+        if (IDontNeedStoneClient.inServer) {
+            ClientConfigSyncNetworkHelper.sendConfigToServer(config);
+        }
         prepareConfigFile();
 
         String jsonString = IDontNeedStone.GSON.toJson(config);

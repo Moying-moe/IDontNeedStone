@@ -42,6 +42,14 @@ public class Config {
         initial();
     }
 
+    public String toJsonString() {
+        return IDontNeedStone.GSON.toJson(this);
+    }
+
+    public static Config fromJsonString(String jsonString) {
+        return IDontNeedStone.GSON.fromJson(jsonString, Config.class);
+    }
+
     public void initial() {
         setBlacklistItem();
 
